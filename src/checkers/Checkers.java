@@ -6,11 +6,14 @@
 package checkers;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -18,25 +21,25 @@ import javafx.stage.Stage;
  * @author Tanner
  */
 public class Checkers extends Application {
+    private final int	numRows	=	8;
+    private final int	numCols	=	8;
+    private final int	boardWidth	=	600;
+    private final int	boardHeight	=	600;
+    private final Color	lightColor	=	Color.SKYBLUE;
+    private final Color	darkColor	=	Color.DARKBLUE;
+    private CheckerBoard	checkerBoard;
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+        checkerBoard = new CheckerBoard(numRows, numCols, boardWidth, boardHeight, lightColor, darkColor);
+        //checkerBoard	=	new	CheckerBoard(numRows,	numCols,	boardWidth,	boardHeight);
+
+        GridPane board = checkerBoard.build();
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(board,checkerBoard.getWidth(), checkerBoard.getHeight());
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Checkers");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
